@@ -25,6 +25,6 @@ const sr = ScrollReveal ({
     reset: true
 })
 
-sr.seveal('.home-text',{delay:280, origin:'botton'})
+//sr.seveal('.home-text',{delay:280, origin:'botton'})
 
-sr.seveal('.featured,.cta,.new,.brand,.contact',{delay:200, origin:'botton'})
+//sr.seveal('.featured,.cta,.new,.brand,.contact',{delay:200, origin:'botton'})

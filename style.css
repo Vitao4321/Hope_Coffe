@@ -100,12 +100,33 @@ section {
     align-items: center;
 }
 
+.home-carrinho {
+    min-height: 100vh;
+    width: 100%;
+    background: url(img/back_carrinho.jpeg);
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center;
+}
+
 .home-text h1 {
     font-size: var(--big-font);
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: .6rem;
     margin-bottom: 1.4rem;
+}
+
+.home-carinho h1 {
+    font-size: var(--big-font);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: .6rem;
+    margin-bottom: 1.4rem;
+    color: #ffffff;
 }
 
 .home-text span {
@@ -117,6 +138,14 @@ section {
     font-weight: 500;
     margin-bottom: 3rem;
     letter-spacing: .2rem;
+}
+
+.home-carinho h6 {
+    font-size: var(--h3-font);
+    font-weight: 700;
+    margin-bottom: 3rem;
+    letter-spacing: .2rem;
+    color: #ffffff;
 }
 
 .btn {
@@ -641,4 +670,3 @@ header.sticky {
         left: 0;
     }
 }
-
