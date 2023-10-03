@@ -524,11 +524,30 @@ header.sticky {
     width: 90%;
 }
 
+.select-image-car{
+    max-width: 250px;
+    float: left; 
+    margin-right: 20px; 
+}
+
+.select-image-car img{
+   width: 100%;
+}
+
+
 .container{
     display: flex;
     align-items: center;
     width: 100%;
     height: calc(100vh - 85px);
+    justify-content: center;
+    gap: 100px;
+}
+
+.container-car {
+    display: flex;
+    align-items: center;
+    width: 100%;
     justify-content: center;
     gap: 100px;
 }
@@ -582,7 +601,7 @@ header.sticky {
     cursor: pointer;
 }
 
-.button{
+.button, .button-car {
     display: inline-block;
     text-decoration: none;
     color:#fff;
@@ -597,7 +616,7 @@ header.sticky {
     font-weight: 700;
 }
 
-.button img{
+.button img, .button-car img{
     width: 14px;
 }
 
@@ -609,6 +628,21 @@ header.sticky {
 }
 
 .content s{
+    text-decoration: line-through;
+}
+
+.content-car {
+    align-items: center;
+}
+
+.content-car {
+    max-width: 900px;
+    display: flex;
+    flex-direction: line;
+    gap: 20px;
+}
+
+.content-car s{
     text-decoration: line-through;
 }
 
