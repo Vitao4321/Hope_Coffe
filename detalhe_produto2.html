@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hope Coffee</title>
+    <!-- Favicons -->
     <link rel="icon" href="img/logo.png" type="image/x-icon">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -16,9 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Favicons -->
-    <!-- <link href="img/coffee_shop_logo_sem_escrita-removebg-preview.png" rel="icon"> -->
-    <link href="img/coffee_shop_logo_sem_escrita-removebg-preview.png" rel="apple-touch-icon">
+    <script src="carrinho.js"></script>
 
 </head>
 
@@ -36,7 +36,7 @@
         </ul>
 
         <div class="header-icons">
-            <a href="#"><i class='bx bx-shopping-bag'></i></a>
+            <a href="carrinho.html"><i class='bx bx-cart'></i></a>
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
 
@@ -64,13 +64,13 @@
                                 <div class="minus">
                                     <img src="img/icon-minus.svg">
                                 </div>
-                                <span>0</span>
+                                <span id="quantidade">0</span>
                                 <div class="plus">
                                     <img src="img/icon-plus.svg">
                                 </div>
                             </div>
 
-                            <a href="" class="button"><img src="img/icon-cart.svg">ADD AO CARRINHO</a>
+                            <a class="button"><img src="img/icon-cart.svg">ADD AO CARRINHO</a>
                         </div>
                     </div>    
                 </div>
