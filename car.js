@@ -1,15 +1,10 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Remover item do carrinho
-    const removeProductButtons = document.getElementsByClassName("button-car");
-    for (var i = 0; i < removeProductButtons.length; i++) {
-        removeProductButtons[i].addEventListener("click", function (event) {
-            event.target.parentElement.parentElement.parentElement.parentElement.remove()
-        })
-    }
+    // Remove texto sem itens no carrinho
+    const removeNoItens = document.querySelector(".center-text-car h2");
+    removeNoItens.parentElement.remove()
 
-    const tituloArmazenado = localStorage.getItem("titulo");
+    /*const tituloArmazenado = localStorage.getItem("titulo");
     const precoArmazenado = localStorage.getItem("preco");
     const quantidadeArmazenada = localStorage.getItem("qtdade");
     const imagemArmazenada = localStorage.getItem("imagem");
@@ -17,18 +12,26 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Titulo:", tituloArmazenado);
     console.log("Preço:", precoArmazenado);
     console.log("Quantidade:", quantidadeArmazenada);
-    console.log("Imagem:", imagemArmazenada);
+    console.log("Imagem:", imagemArmazenada);*/
 
-    // Remove texto sem itens no carrinho
-    const removeNoItens = document.querySelector(".center-text-car h2");
-    removeNoItens.parentElement.remove()
-    
+    const ItemCar = JSON.parse(localStorage.getItem("carrinhoItens")) || [];
+    const newItemCar = [];
+    //localStorage.clear();
 
-    let newItemCar = document.createElement("div");
-    newItemCar.classList.add("car-item")
+    console.log(ItemCar)
 
-    newItemCar.innerHTML =
-        ` 
+    for (var i = 0; i < ItemCar.length; i++) {
+        const idItemCar = ItemCar[i].id;
+        const tituloArmazenado = ItemCar[i].titulo;
+        const precoArmazenado = ItemCar[i].preco;
+        const quantidadeArmazenada = ItemCar[i].quantidade;
+        const imagemArmazenada = ItemCar[i].imagem;
+
+        let novoItem = document.createElement("div");
+        novoItem.classList.add("car-item");
+
+        novoItem.innerHTML =
+            `
             <div class="container-car">
                 <div class="car-item">
                     <div class="select-image-car">
@@ -48,18 +51,55 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <img src="img/icon-plus.svg">
                                     </div>
                                 </div>
-                                <a class="button-car"><img src="img/x-circle-regular-24.png">REMOVER</a>
+                                <a class="button-car" data-id="${[i]}"><img src="img/x-circle-regular-24.png">REMOVER ${[i]}</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        `
+        `;
 
-    // Obtenha o elemento do corpo da tabela pelo ID (corrija o erro de digitação aqui)
+        // Adicione o novo item do carrinho ao array de itens do carrinho
+        newItemCar.push(novoItem);
+    }
+
+    // Obtenha o elemento do corpo da tabela pelo ID
     const tableBody = document.getElementById("product-car");
 
-    // Adicione o novo item do carrinho ao corpo da tabela
-    tableBody.append(newItemCar);
+    // Adicione os itens do carrinho ao corpo da tabela
+    tableBody.append(...newItemCar);
+
+
+
+    // Remover item do carrinho
+    const removeProductButtons = document.getElementsByClassName("button-car");
+    for (var i = 0; i < removeProductButtons.length; i++) {
+        removeProductButtons[i].addEventListener("click", function (event) {
+            event.target.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
+
+        })
+    }
+
+
+    // Adicione um event listener para os botões "REMOVER"
+    document.addEventListener("click", function(event) {
+        if (event.target.classList.contains("button-car")) {
+            // Obtenha o identificador único do item a ser removido
+            const itemId = event.target.dataset.id;
+
+            // Remova o item correspondente da variável global
+            const novoCarrinho = ItemCar.filter(item => item.id !== itemId);
+
+            // Atualize o localStorage com o novo array de carrinho
+            localStorage.setItem("carrinhoItens", JSON.stringify(novoCarrinho));
+
+            // Recarregue a página ou atualize a interface do carrinho para refletir as alterações
+            // ...
+
+            // Por exemplo, você pode remover o elemento do DOM associado ao item removido
+            event.target.closest(".car-item").remove();
+        }
+    });
+
 
 });
