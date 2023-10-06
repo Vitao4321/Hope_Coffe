@@ -19,15 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
             quantidade--;
             quantidadeElement.innerText = quantidade;
         }
-    });
+    }); 
 
 
     // Guardar o valor do item e Qtdade
     const carrinhoButton = document.querySelector(".button")
     carrinhoButton.addEventListener("click", function () {
-
-        let idProdCar = 0;
-        idProdCar += 1;
 
         const productTitle = document.querySelector(".content h1").innerText;
 
@@ -37,8 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const produtcImagem = document.querySelector(".select-image img").src;
 
+        function gerarIdUnico() {
+            return '_' + Math.random().toString(36).substr(2, 9);
+        }
+
         const item = {
-            id: idProdCar,
+            id: gerarIdUnico(),
             titulo: productTitle,
             preco: productPrice,
             quantidade: quantidadeitem,
@@ -53,12 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Atualiza os itens do carrinho no localStorage
         localStorage.setItem("carrinhoItens", JSON.stringify(carrinhoItens));
-
-        // Armazenar os dados do produto
-        /*localStorage.setItem("titulo", productTitle);
-        localStorage.setItem("preco", productPrice);
-        localStorage.setItem("qtdade", quantidadeitem);
-        localStorage.setItem("imagem", produtcImagem);*/
 
     });
 
