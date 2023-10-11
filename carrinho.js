@@ -26,13 +26,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const carrinhoButton = document.querySelector(".button")
     carrinhoButton.addEventListener("click", function () {
 
+        alert("ITEM ADICIONADO COM SUCESSO");
+
         const productTitle = document.querySelector(".content h1").innerText;
 
         const productPrice = document.getElementsByClassName("Preço")[0].innerText.replace("$", "");
 
         const quantidadeitem = document.getElementById("quantidade").innerText;
 
-        const produtcImagem = document.querySelector(".select-image img").src;
+        let produtcImagemPequena;
+        let produtcImagemGrande;
+
+        if (document.querySelector(".select-image img")) {
+            produtcImagemPequena = document.querySelector(".select-image img").src;
+        }
+        else {
+            produtcImagemGrande = document.querySelector('.select-image-grande img').src;
+        }
+
+        const produtcImagem = produtcImagemPequena || produtcImagemGrande;
 
         function gerarIdUnico() {
             return '_' + Math.random().toString(36).substr(2, 9);

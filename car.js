@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <img src="img/icon-plus.svg">
                                     </div>
                                 </div>
-                                <a class="button-car"><img src="img/x-circle-regular-24.png"><p>${IdUnicoCar}</p></a>
+                                <a class="button-car"><img src="img/x-circle-regular-24.png">REMOVER</a>
+                                <input type="hidden" id="idRemove" name="IdUnicoCar" value="${IdUnicoCar}">                                
                             </div>
                         </div>
                     </div>
@@ -54,10 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Remover item do carrinho
     const removeProductButtons = document.getElementsByClassName("button-car");
+    
 
     for (var i = 0; i < removeProductButtons.length; i++) {
         removeProductButtons[i].addEventListener("click", function (event) {
-            const idToRemove = event.target.parentElement.querySelector("p").textContent;
+            const idToRemove = document.getElementById('idRemove').value;
 
             const updatedCartItems = ItemCar.filter(item => item.id !== idToRemove);
             localStorage.setItem("carrinhoItens", JSON.stringify(updatedCartItems));
@@ -72,38 +74,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function messageCarEmpty() {
         const emptyCar = document.getElementsByClassName("car-item").length;
-        console.log(emptyCar);
 
         if (emptyCar != 0) {
             const removeNoItems = document.querySelector(".center-text-car h2");
-            removeNoItems.parentElement.remove();
+            removeNoItems.parentElement.parentElement.remove();
+        }
+        else {            
+            const removeValorTotMenssage = document.querySelector(".valor-tot-car");
+            console.log(removeValorTotMenssage)
+            removeValorTotMenssage.parentElement.parentElement.remove();
         }
     }
+
+
 
     calculoValorTot();
 
-    // DECLARAÇÃO DA VARIAVEL DE SOMA TOTAL
-    let totalAmount = 0;
-
     function calculoValorTot() {
+        let totalAmount = 0;
 
-        for (var i = 0; i < ItemCar.length; i++) {
-            const productPrice = parseFloat(ItemCar[i].document.getElementsByClassName("Preço")[0].innerText.replace("$", ""));
-            const quantidadeitem = parseInt(ItemCar[i].getElementById("quantidade").innerText);
+        // Selecione todos os itens no carrinho
+        const items = document.querySelectorAll('.container-car');
+        console.log(items)
 
-            //const productPrice = document.getElementsByClassName("Preço")[0].innerText.replace("$", "");
-            console.log("calculo do valor total");
+        // Itere sobre cada item no carrinho
+        items.forEach(function (item) {
+            // Obtenha o preço e a quantidade para cada item
+            const productPrice = parseFloat(item.querySelector('.Preço').innerText.replace('$', ''));
+            const quantidadeitem = parseInt(item.querySelector('#quantidade').innerText);
 
-            //const quantidadeitem = document.getElementById("quantidade").innerText;
-            console.log(productPrice);
-            console.log(quantidadeitem);
+            // Calcule o subtotal para o item atual e adicione ao totalAmount
+            const subtotal = productPrice * quantidadeitem;
+            totalAmount += subtotal;
+        });
 
-            totalAmount += (productPrice * quantidadeitem);
-            console.log(totalAmount);
-        }
+        // Exiba o valor total no console
+        console.log('O valor total é de: $' + totalAmount.toFixed(2));
 
-        // FARER A SOMA DO TOTAL --> CARRINHO
-        //console.log("O valor totoal é de: " + totalAmount);
-
+        const valorTot = document.querySelector(".valor-tot-car span");
+        console.log(valorTot);
+    
+        valorTot.innerText = "R$" + totalAmount.toFixed(2);
     }
+
 });
