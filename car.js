@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantidadeArmazenada = ItemCar[i].quantidade;
         const imagemArmazenada = ItemCar[i].imagem;
 
+        console.log(IdUnicoCar);
+
         let novoItem = document.createElement("div");
         novoItem.classList.add("car-item");
 
@@ -34,8 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                         <img src="img/icon-plus.svg">
                                     </div>
                                 </div>
-                                <a class="button-car"><img src="img/x-circle-regular-24.png">REMOVER</a>
-                                <input type="hidden" id="idRemove" name="IdUnicoCar" value="${IdUnicoCar}">                                
+                                <a class="button-car"><img src="img/x-circle-regular-24.png">${IdUnicoCar}</a>
+                                <input type="hidden" id="idRemove" name="IdUnicoCar" data-product-id="${IdUnicoCar}" value="${IdUnicoCar}">                                
                             </div>
                         </div>
                     </div>
@@ -53,20 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Adicione os itens do carrinho ao corpo da tabela
     tableBody.append(...newItemCar);
 
-    // Remover item do carrinho
-    const removeProductButtons = document.getElementsByClassName("button-car");
     
-
-    for (var i = 0; i < removeProductButtons.length; i++) {
-        removeProductButtons[i].addEventListener("click", function (event) {
-            const idToRemove = document.getElementById('idRemove').value;
-
-            const updatedCartItems = ItemCar.filter(item => item.id !== idToRemove);
-            localStorage.setItem("carrinhoItens", JSON.stringify(updatedCartItems));
-            console.log('Item removido do carrinho.');
-            location.reload();
-        });
-    }
 
 
     // Verificar se o carrinho está vazio e exibir uma mensagem apropriada
@@ -81,11 +70,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         else {            
             const removeValorTotMenssage = document.querySelector(".valor-tot-car");
-            console.log(removeValorTotMenssage)
             removeValorTotMenssage.parentElement.parentElement.remove();
         }
     }
 
+
+
+    // Remover item do carrinho
+    const removeProductButtons = document.getElementsByClassName("idRemove");
+    console.log(removeProductButtons);
+
+    for (var i = 0; i < removeProductButtons.length; i++) {
+        //removeProductButtons[i].addEventListener("click", function (event) {
+            const idToRemove = document.getElementById('idRemove').value;
+            console.log(idToRemove);
+
+            /*const updatedCartItems = ItemCar.filter(item => item.id !== idToRemove);
+            localStorage.setItem("carrinhoItens", JSON.stringify(updatedCartItems));
+            console.log('Item removido do carrinho.');
+            location.reload();*/
+        //});
+    }
+    
 
 
     calculoValorTot();
@@ -95,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Selecione todos os itens no carrinho
         const items = document.querySelectorAll('.container-car');
-        console.log(items)
 
         // Itere sobre cada item no carrinho
         items.forEach(function (item) {
@@ -110,11 +115,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Exiba o valor total no console
         console.log('O valor total é de: $' + totalAmount.toFixed(2));
-
         const valorTot = document.querySelector(".valor-tot-car span");
-        console.log(valorTot);
-    
         valorTot.innerText = "R$" + totalAmount.toFixed(2);
     }
 
 });
+
+
+
+/*
+Remover item do carrinho
+const removeProductButtons = document.getElementsByClassName("button-car");
+console.log(removeProductButtons);
+
+removeProductButtons[i].addEventListener("click", function (event) {
+    const idToRemove = document.getElementById('idRemove').value;
+    console.log(idToRemove);
+});
+
+for (var i = 0; i < removeProductButtons.length; i++) {
+        
+        
+        const updatedCartItems = ItemCar.filter(item => item.id !== idToRemove);
+        localStorage.setItem("carrinhoItens", JSON.stringify(updatedCartItems));
+        console.log('Item removido do carrinho.');
+        location.reload();
+    });
+}
+
+*/
